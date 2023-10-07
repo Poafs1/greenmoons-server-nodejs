@@ -59,4 +59,8 @@ export class ConfigsService {
       redisTlsConnectionEnabled: this.config.get<boolean>('REDIS_TLS_CONNECTION_ENABLED') || false,
     };
   }
+
+  get movieApi(): string {
+    return this.config.get<string>('MOVIE_API');
+  }
 }

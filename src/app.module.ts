@@ -11,7 +11,16 @@ import { JwtModule } from './jwt/jwt.module';
 import { MovieModule } from './movie/movie.module';
 
 @Module({
-  imports: [ConfigsModule, HealthCheckModule, SqlModule, RedisModule, AuthModule, UsersModule, JwtModule, MovieModule],
+  imports: [
+    ConfigsModule,
+    HealthCheckModule,
+    SqlModule,
+    RedisModule,
+    AuthModule,
+    UsersModule,
+    JwtModule,
+    MovieModule,
+  ],
   controllers: [AppController],
   providers: [AppService],
 })

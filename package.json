@@ -21,7 +21,11 @@
     "test:e2e": "jest --config ./test/jest-e2e.json",
     "postinstall": "husky install",
     "prepack": "pinst --disable",
-    "postpack": "pinst --enable"
+    "postpack": "pinst --enable",
+    "typeorm": "ts-node --transpile-only ./node_modules/typeorm/cli.js",
+    "pg:init:data": "sh ./mock/pg/init.sh",
+    "pg:migration:run": "yarn typeorm --config ./typeorm/ormconfig.json migration:run",
+    "pg:migration:generate": "yarn typeorm --config ./typeorm/ormconfig.json -d ./migrations migration:generate -n"
   },
   "dependencies": {
     "@liaoliaots/nestjs-redis": "^9.0.5",

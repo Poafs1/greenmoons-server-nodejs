@@ -11,7 +11,7 @@ import { RefreshInputDto } from './dto/refresh.dto';
 
 @Injectable()
 export class AuthService {
-  private redisPrefix = 'token:';
+  private tokenPrefix = 'token';
 
   constructor(
     private usersService: UsersService,
@@ -45,7 +45,7 @@ export class AuthService {
     ); // 7776000
 
     await this.redisService.set(
-      `${this.redisPrefix}${payload.sub}`,
+      `${this.tokenPrefix}:${payload.sub}`,
       refreshToken,
       refreshTokenLifeTimeRedisFormat,
     );
@@ -101,7 +101,7 @@ export class AuthService {
 
   async signOut(userId: string): Promise<boolean> {
     try {
-      await this.redisService.del(`${this.redisPrefix}${userId}`);
+      await this.redisService.del(`${this.tokenPrefix}:${userId}`);
 
       return true;
     } catch (error) {
@@ -119,7 +119,7 @@ export class AuthService {
         throw new ForbiddenException('Refresh token expired');
       }
 
-      const foundRefreshToken = await this.redisService.get(`${this.redisPrefix}${payload.sub}`);
+      const foundRefreshToken = await this.redisService.get(`${this.tokenPrefix}:${payload.sub}`);
 
       if (foundRefreshToken !== refreshToken) {
         throw new ForbiddenException('Invalid refresh token');
