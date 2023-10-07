@@ -1,8 +1,8 @@
 import { Module } from '@nestjs/common';
 import { MovieService } from './movie.service';
 import { MovieController } from './movie.controller';
-import { ConfigsModule } from 'src/configs/configs.module';
-import { RedisModule } from 'src/redis/redis.module';
+import { ConfigsModule } from '../configs/configs.module';
+import { RedisModule } from '../redis/redis.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { MovieFavoriteEntity } from './entities/movieFavorite.entity';
 

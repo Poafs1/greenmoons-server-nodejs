@@ -1,11 +1,11 @@
 import { Injectable, InternalServerErrorException, NotFoundException } from '@nestjs/common';
-import { ConfigsService } from 'src/configs/configs.service';
+import { ConfigsService } from '../configs/configs.service';
 import axios from 'axios';
-import { RedisService } from 'src/redis/redis.service';
+import { RedisService } from '../redis/redis.service';
 import { MovieDto, MoviesDto, MoviesFilterDto } from './dto/movie.dto';
-import { PaginationInputDto } from 'src/utils/dto/pagination.dto';
-import { pageInfo } from 'src/utils/helpers/pagination.helper';
-import { JwtDto } from 'src/auth/dto/jwt.dto';
+import { PaginationInputDto } from '../utils/dto/pagination.dto';
+import { pageInfo } from '../utils/helpers/pagination.helper';
+import { JwtDto } from '../auth/dto/jwt.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { MovieFavoriteEntity } from './entities/movieFavorite.entity';
 import { Repository } from 'typeorm';
@@ -51,9 +51,11 @@ export class MovieService {
 
       const { movies } = data;
 
-      await this.redisService.set(this.moviesPrefix, JSON.stringify(movies), 60 * 60 * 24); // 1 day cache
+      const value = JSON.stringify(movies);
 
-      foundMovies = data;
+      await this.redisService.set(this.moviesPrefix, value, 60 * 60 * 24); // 1 day cache
+
+      foundMovies = value;
     }
 
     const movies = JSON.parse(foundMovies);
