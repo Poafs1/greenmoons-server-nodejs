@@ -24,7 +24,7 @@ export class AuthController {
   @UseGuards(JwtAuthGuard)
   @Post('signout')
   async signOut(@Request() req): Promise<boolean> {
-    return this.authService.signOut(req.user.userId);
+    return this.authService.signOut(req.user.sub);
   }
 
   @Post('refresh')

@@ -1,4 +1,13 @@
-import { IsArray, IsNotEmpty, IsNumber, IsObject, IsString } from 'class-validator';
+import {
+  IsArray,
+  IsBoolean,
+  IsBooleanString,
+  IsNotEmpty,
+  IsNumber,
+  IsObject,
+  IsOptional,
+  IsString,
+} from 'class-validator';
 import { PaginationDto } from 'src/utils/dto/pagination.dto';
 
 export class MovieDto {
@@ -73,6 +82,9 @@ export class MovieDto {
 
   @IsString()
   trailer_ivx_key: string;
+
+  @IsBoolean()
+  is_favorite: boolean;
 }
 
 export class MovieEdgeDto {
@@ -92,4 +104,10 @@ export class MoviesDto {
   @IsNotEmpty()
   @IsArray()
   edges: MovieEdgeDto[];
+}
+
+export class MoviesFilterDto {
+  @IsOptional()
+  @IsBooleanString()
+  favoriteOnly: boolean;
 }
