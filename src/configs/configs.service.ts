@@ -3,6 +3,7 @@ import { ConfigService } from '@nestjs/config';
 import { IJwtConfig } from './interfaces/jwt.config.interface';
 import { IPGConfig } from './interfaces/pg.config.interface';
 import { IServerConfig } from './interfaces/serverConfig.interface';
+import { IRedisConfig } from './interfaces/redis.config.interface';
 
 @Injectable()
 export class ConfigsService {
@@ -46,6 +47,16 @@ export class ConfigsService {
       accessTokenLifeTime: this.config.get<string>('JWT_ACCESS_TOKEN_LIFETIME') || '1h',
       refreshTokenLifeTime: this.config.get<string>('JWT_REFRESH_TOKEN_LIFETIME') || '90d',
       secret: this.config.get<string>('JWT_SECRET') || 'secret',
+    };
+  }
+
+  get redis(): IRedisConfig {
+    return {
+      host: this.config.get<string>('REDIS_HOST') || 'localhost',
+      port: this.config.get<number>('REDIS_PORT') || 6379,
+      password: this.config.get<string>('REDIS_PASSWORD') || '',
+      loginTimeout: this.config.get<number>('REDIS_LOGIN_TIMEOUT') || 10800,
+      redisTlsConnectionEnabled: this.config.get<boolean>('REDIS_TLS_CONNECTION_ENABLED') || false,
     };
   }
 }
