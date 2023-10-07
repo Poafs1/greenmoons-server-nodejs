@@ -13,7 +13,7 @@
 cp .env.example .env
 ```
 
-> If you want to connect the app to local database, please update `PG_HOST=localhost`
+> If you want to connect the app to database in Docker, please update `PG_HOST` and `REDIS_HOST` to `host.docker.internal`
 
 **Step 2**: Package install
 
