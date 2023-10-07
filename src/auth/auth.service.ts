@@ -1,12 +1,12 @@
 import { ForbiddenException, Injectable, InternalServerErrorException } from '@nestjs/common';
 import { UserDto } from 'src/users/dto/user.dto';
-import { UsersService } from 'src/users/users.service';
+import { UsersService } from '../users/users.service';
 import { AuthDto } from './dto/auth.dto';
 import { SignUpInputDto } from './dto/signUp.dto';
-import { ConfigsService } from 'src/configs/configs.service';
+import { ConfigsService } from '../configs/configs.service';
 import { JwtDto } from './dto/jwt.dto';
-import { RedisService } from 'src/redis/redis.service';
-import { JwtService } from 'src/jwt/jwt.service';
+import { RedisService } from '../redis/redis.service';
+import { JwtService } from '../jwt/jwt.service';
 import { RefreshInputDto } from './dto/refresh.dto';
 
 @Injectable()
