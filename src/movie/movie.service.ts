@@ -81,6 +81,7 @@ export class MovieService {
       const foundMovieFavorite = await this.movieFavoriteEntity.find({
         where: {
           user_id: user.sub,
+          is_favorite: true,
         },
       });
 
