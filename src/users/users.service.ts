@@ -50,6 +50,20 @@ export class UsersService {
     }
   }
 
+  async findById(id: string): Promise<UserDto | undefined> {
+    try {
+      const foundUser = await this.userEntity.findOne({ id });
+
+      if (!foundUser) {
+        return undefined;
+      }
+
+      return this.mapUser(foundUser);
+    } catch (error) {
+      throw new InternalServerErrorException(error);
+    }
+  }
+
   async create(user: UserInputDto): Promise<UserDto> {
     try {
       const { email, password } = user;
